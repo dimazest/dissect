@@ -3,3 +3,12 @@
 */__pycache__/
 *.egg-info/
 
+.Python
+
+bin/
+include/
+lib/
+man/
+
+resource/unittest/output/
+resource/unittest/pipelines_test_resources/
