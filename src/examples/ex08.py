@@ -7,4 +7,4 @@ from composes.similarity.cos import CosSimilarity
 my_space = io_utils.load("./data/out/ex01.pkl")
 
 #get the top 2 neighbours of "car"
-print my_space.get_neighbours("car", 2, CosSimilarity())
+print(my_space.get_neighbours("car", 2, CosSimilarity()))

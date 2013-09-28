@@ -14,7 +14,7 @@ predicted = my_space.get_sims(word_pairs, CosSimilarity())
 
 #compute correlations
 gold = io_utils.read_list(fname, field=2)
-print "Spearman"
-print scoring_utils.score(gold, predicted, "spearman")
-print "Pearson"
-print scoring_utils.score(gold, predicted, "pearson")
+print("Spearman")
+print(scoring_utils.score(gold, predicted, "spearman"))
+print("Pearson")
+print(scoring_utils.score(gold, predicted, "pearson"))
