@@ -91,7 +91,7 @@ class NeighboursPipelineTest(unittest.TestCase):
                        "-i", self.dir_ + "pipelines_test_resources/neighbours_input.txt",
                        "-n", "2",
                        "--space", "%spipelines_test_resources/CORE_SS.mat3.raw.top_sum_3.svd_2.pkl,%spipelines_test_resources/CORE_SS.mat3.raw.top_sum_3.svd_2.pkl" %(self.dir_,self.dir_),
-                       "-o" "/home/georgianadinu/work/FAKE_PATH"
+                       "-o" "/tmp/FAKE_PATH"
                       ])
         #neighbours_list = read_neighbours_list(self.dir_ + "NEIGHBOURS.neighbours_input.txt.euclidean")
         #print(len(neighbours_list))

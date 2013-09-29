@@ -3,25 +3,10 @@ Created on Oct 17, 2012
 
 @author: Georgiana Dinu, Pham The Nghia
 '''
-'''
-Created on Oct 17, 2012
-
-@author: Georgiana Dinu, Pham The Nghia
-'''
-
-'''
-Created on Jun 12, 2012
-
-@author: thenghia.pham
-'''
-
-
 import sys
 import getopt
-try:
-    from ConfigParser import ConfigParser
-except ImportError:
-    from configparser import ConfigParser
+import logging
+
 from composes.semantic_space.space import Space
 from composes.similarity.cos import CosSimilarity
 from composes.similarity.lin import LinSimilarity
@@ -30,7 +15,10 @@ from composes.similarity.euclidean import EuclideanSimilarity
 from composes.utils import io_utils
 from composes.utils import log_utils
 import pipelines.pipeline_utils as utils
-import logging
+
+from pipelines.configparser import configparser
+
+
 logger = logging.getLogger("test vector space construction pipeline")
 
 
@@ -93,6 +81,7 @@ def compute_neighbours(in_file, no_neighbours, out_dir, sim_measure, space_files
             for neighbour, neighbour_sim in result:
                 out_stream.write("\t%s %s\n" % (neighbour, neighbour_sim))
 
+
 def main(sys_argv):
     try:
         opts, argv = getopt.getopt(sys_argv[1:], "hi:o:s:m:n:l:",
@@ -112,21 +101,19 @@ def main(sys_argv):
     log_file = None
     no_neighbours = "20"
 
-
     if (len(argv) == 1):
         config_file = argv[0]
-        with open(config_file) as f:
+        with open(config_file):
             pass
-        config = ConfigParser()
-        config.read(config_file)
-        out_dir = utils.config_get(section, config, "output", None)
-        in_file = utils.config_get(section, config, "input", None)
-        sim_measure = utils.config_get(section, config, "sim_measure", None)
-        spaces = utils.config_get(section, config, "space", None)
+        configparser.read(config_file)
+        out_dir = utils.config_get(section, configparser, "output", None)
+        in_file = utils.config_get(section, configparser, "input", None)
+        sim_measure = utils.config_get(section, configparser, "sim_measure", None)
+        spaces = utils.config_get(section, configparser, "space", None)
         if not spaces is None:
             spaces = spaces.split(",")
-        no_neighbours = utils.config_get(section, config, "no_neighbours", no_neighbours)
-        log_file = utils.config_get(section, config, "log", None)
+        no_neighbours = utils.config_get(section, configparser, "no_neighbours", no_neighbours)
+        log_file = utils.config_get(section, configparser, "log", None)
 
     for opt, val in opts:
         if opt in ("-i", "--input"):
@@ -157,8 +144,6 @@ def main(sys_argv):
     utils.assert_option_not_none(spaces, "Semantic space file required", usage)
 
     compute_neighbours(in_file, no_neighbours, out_dir, sim_measure, spaces)
-
-
 
 if __name__ == '__main__':
     main(sys.argv)
