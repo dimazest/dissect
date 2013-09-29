@@ -3,28 +3,33 @@ Created on Oct 16, 2012
 
 @author: nghia
 '''
+from __future__ import print_function
 
 import numpy as np
 import pickle
 import os
 import gzip as gzip
 from warnings import warn
+import struct
+
 from scipy.sparse import csr_matrix
+
 from composes.matrix.dense_matrix import DenseMatrix
 from composes.matrix.sparse_matrix import SparseMatrix
 from composes.utils.gen_utils import assert_is_instance
 from composes.utils.gen_utils import assert_valid_kwargs
-import struct
+
 
 def save(object_, file_name):
     create_parent_directories(file_name)
     try:
-        with open(file_name,'w') as f:
+        with open(file_name, 'w') as f:
             pickle.dump(object_, f, 2)
     except struct.error:
         warn("object is too big, using pickle with protocol 0")
-        with open(file_name,'w') as f:
+        with open(file_name, 'w') as f:
             pickle.dump(object_, f, 0)
+
 
 def load(file_name, data_type=None):
     with open(file_name) as f:
@@ -35,17 +40,20 @@ def load(file_name, data_type=None):
 
     return result
 
+
 def create_directories(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
+
 
 def create_parent_directories(file_name):
     parts = file_name.split("/")
     if (len(parts) > 1):
         parent_dir = "/".join(parts[0:-1])
         if (not os.path.exists(parent_dir)):
-            print "Creating %s" % parent_dir
+            print("Creating %s" % parent_dir)
             os.makedirs(parent_dir)
+
 
 def extract_indexing_structs(filename, field_list):
     str2id = {}
@@ -127,6 +135,7 @@ def read_list(file_name, **kwargs):
                     result.append(line)
     return result
 
+
 def read_sparse_space_data(matrix_file, row2id, column2id, **kwargs):
 
     if matrix_file.endswith(".gz"):
@@ -137,8 +146,8 @@ def read_sparse_space_data(matrix_file, row2id, column2id, **kwargs):
     no_lines = sum(1 for line in f if line.strip() != "")
     f.close()
 
-    row = np.zeros(no_lines, dtype = np.int32)
-    col = np.zeros(no_lines, dtype = np.int32)
+    row = np.zeros(no_lines, dtype=np.int32)
+    col = np.zeros(no_lines, dtype=np.int32)
 
     assert_valid_kwargs(kwargs, ["dtype"])
 
@@ -166,7 +175,7 @@ def read_sparse_space_data(matrix_file, row2id, column2id, **kwargs):
                     data[i] = element_type(count)
                     i += 1
                     if i % 1000000 == 0:
-                        print "Progress...%d" % i
+                        print("Progress...%d" % i)
             #if len(line_elements) > 3:
             #    warn("Invalid input line:%s. Expected 3 fields, ignoring additional ones!" % line.strip())
             else:
@@ -179,11 +188,12 @@ def read_sparse_space_data(matrix_file, row2id, column2id, **kwargs):
     row = row[0:i]
     col = col[0:i]
 
-    m = SparseMatrix(csr_matrix( (data,(row,col)), shape = (len(row2id), len(column2id))))
+    m = SparseMatrix(csr_matrix((data, (row, col)), shape=(len(row2id), len(column2id))))
     if m.mat.nnz != i:
         warn("Found 0-counts or duplicate row,column pairs. (Duplicate entries are summed up.)")
 
     return m
+
 
 def read_dense_space_data(matrix_file, row2id, **kwargs):
     #get number of rows and columns
@@ -209,7 +219,7 @@ def read_dense_space_data(matrix_file, row2id, **kwargs):
     else:
         element_type = np.double
 
-    m = np.mat(np.zeros(shape=(no_rows, no_cols), dtype = element_type))
+    m = np.mat(np.zeros(shape=(no_rows, no_cols), dtype=element_type))
 
     if matrix_file.endswith(".gz"):
         f = gzip.open(matrix_file, "rb")
@@ -228,21 +238,22 @@ def read_dense_space_data(matrix_file, row2id, **kwargs):
                 if word in row_string_set != 0:
                     warn("Found duplicate row: %s. Ignoring it." % word)
                 else:
-                    m[i,:] = elements[1:]
+                    m[i, :] = elements[1:]
                     row_string_set.add(word)
 
     f.close()
 
     return DenseMatrix(m)
 
+
 def print_list(list_, file_name):
-    with open(file_name,'w') as f:
+    with open(file_name, 'w') as f:
         for item in list_:
             f.write(item + "\n")
 
 
 def print_cooc_mat_sparse_format(matrix_, id2row, id2column, file_prefix):
-    matrix_file = "%s.%s" %(file_prefix, "sm")
+    matrix_file = "%s.%s" % (file_prefix, "sm")
     if not id2column:
         raise ValueError("Cannot print matrix with no column info in sparse format!")
 
@@ -259,20 +270,20 @@ def print_cooc_mat_sparse_format(matrix_, id2row, id2column, file_prefix):
             row = id2row[0]
             for i in xrange(len(data)):
                 while i == next_row:
-                    row_index +=1
+                    row_index += 1
                     next_row = row_indices[row_index + 1]
                     row = id2row[row_index]
                 col = id2column[col_indices[i]]
-                f.write("%s\t%s\t%f\n" %(row,col,data[i]))
+                f.write("%s\t%s\t%f\n" % (row, col, data[i]))
         else:
             for i in range(mat.shape[0]):
                 for j in range(mat.shape[1]):
-                    if mat[i,j] != 0:
-                        f.write("%s\t%s\t%f\n" %(id2row[i], id2column[j], mat[i,j]))
+                    if mat[i, j] != 0:
+                        f.write("%s\t%s\t%f\n" % (id2row[i], id2column[j], mat[i, j]))
 
 
 def print_cooc_mat_dense_format(matrix_, id2row, file_prefix):
-    matrix_file = "%s.%s" %(file_prefix, "dm")
+    matrix_file = "%s.%s" % (file_prefix, "dm")
 
     with open(matrix_file, 'w') as f:
         for i, row in enumerate(id2row):
