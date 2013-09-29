@@ -16,11 +16,10 @@ def read_number_list(file_name, column):
     with open(file_name) as f:
         for line in f:
             line = line.strip()
-            if (line != ""):
+            if line:
                 elements = line.split()
                 if (column >= len(elements)):
-                    raise ValueError("Expected line to have at least %d elements: %s"
-                                     %(column + 1,line.strip()))
+                    raise ValueError("Expected line to have at least %d elements: %s" % (column + 1, line.strip()))
                 result.append(float(elements[column]))
 
     return result

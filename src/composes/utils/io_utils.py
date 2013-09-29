@@ -70,7 +70,7 @@ def extract_indexing_structs(filename, field_list):
         input_stream = open(filename, "rb")
 
     for line in input_stream:
-        if line.strip() != "":
+        if line.strip():
             elements = line.strip().split()
             if len(elements) <= max_field:
                 warn("Invalid input line:%s. Skipping it" % line.strip())
@@ -100,7 +100,7 @@ def read_tuple_list(data_file, **kwargs):
     with open(data_file) as f:
         for line in f:
             line = line.strip()
-            if line != "":
+            if line:
                 elements = line.split()
                 if field_list:
                     try:
@@ -123,7 +123,7 @@ def read_list(file_name, **kwargs):
     with open(file_name) as f:
         for line in f:
             line = line.strip()
-            if line != "":
+            if line:
                 if not field is None:
                     try:
                         result.append(line.split()[field])
@@ -142,7 +142,7 @@ def read_sparse_space_data(matrix_file, row2id, column2id, **kwargs):
     else:
         f = open(matrix_file, "rb")
 
-    no_lines = sum(1 for line in f if line.strip() != "")
+    no_lines = sum(1 for line in f if line.strip())
     f.close()
 
     row = np.zeros(no_lines, dtype=np.int32)
@@ -164,7 +164,7 @@ def read_sparse_space_data(matrix_file, row2id, column2id, **kwargs):
 
     i = 0
     for line in f:
-        if line.strip() != "":
+        if line.strip():
             line_elements = line.strip().split()
             if len(line_elements) >= 3:
                 [word1, word2, count] = line_elements[0:3]

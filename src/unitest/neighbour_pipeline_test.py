@@ -9,6 +9,7 @@ from unitest import toolkit_dir
 import pipelines.compute_neighbours as find_neighbours
 from pipelines import build_core_space as bcs
 
+
 def read_neighbours_list(file_name):
     result = []
     word = None
@@ -16,23 +17,22 @@ def read_neighbours_list(file_name):
     with open(file_name) as f:
         for line in f:
             line = line.strip()
-            if (line != ""):
+            if line:
                 elements = line.split()
                 if (len(elements) == 1):
-                    if word != None:
-                        result.append((word,neighbours))
+                    if word is not None:
+                        result.append((word, neighbours))
                         neighbours = []
                     else:
                         word = elements[0]
                 else:
-                    neighbours.append((elements[0],elements[1]))
-        if word != None:
-            result.append((word,neighbours))
+                    neighbours.append((elements[0], elements[1]))
+        if word is not None:
+            result.append((word, neighbours))
     return result
 
 
 class NeighboursPipelineTest(unittest.TestCase):
-
 
     def setUp(self):
         self.dir_ = data_dir
