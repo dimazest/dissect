@@ -136,10 +136,7 @@ class LexicalFunction(CompositionModel):
         else:
             new_element_shape = phrase_space.element_shape + (arg_space.element_shape[0],)
 
-        for i in xrange(len(key_ranges)):
-
-            idx_beg, idx_end = key_ranges[i]
-
+        for i, (idx_beg, idx_end) in enumerate(key_ranges):
             print("Training lexical function...%s with %d samples" % (keys[i], idx_end - idx_beg))
 
             arg_mat = arg_space.get_rows(arg_list[idx_beg:idx_end])
@@ -196,22 +193,20 @@ class LexicalFunction(CompositionModel):
         start = time.time()
 
         assert_is_instance(arg_space, Space)
-        arg1_list, arg2_list, phrase_list = self.valid_data_to_lists(data,
-                                                                     (self._function_space.row2id,
-                                                                      arg_space.row2id,
-                                                                      None))
+        arg1_list, arg2_list, phrase_list = self.valid_data_to_lists(
+            data,
+            (self._function_space.row2id, arg_space.row2id, None),
+        )
 
         composed_vec_list = []
-        for i in xrange(len(arg1_list)):
+        for i, arg in enumerate(arg1_list):
             arg1_vec = self._function_space.get_row(arg1_list[i])
             arg2_vec = arg_space.get_row(arg2_list[i])
 
             matrix_type = get_type_of_largest([arg1_vec, arg2_vec])
-            [arg1_vec, arg2_vec] = resolve_type_conflict([arg1_vec, arg2_vec],
-                                                              matrix_type)
+            [arg1_vec, arg2_vec] = resolve_type_conflict([arg1_vec, arg2_vec], matrix_type)
 
-            composed_ph_vec = self._compose(arg1_vec, arg2_vec,
-                                            self._function_space.element_shape)
+            composed_ph_vec = self._compose(arg1_vec, arg2_vec, self._function_space.element_shape)
 
             composed_vec_list.append(composed_ph_vec)
 
@@ -220,15 +215,11 @@ class LexicalFunction(CompositionModel):
 
         log.print_name(logger, self, 1, "\nComposed with composition model:")
         log.print_info(logger, 3, "Composed total data points:%s" % len(arg1_list))
-        log.print_info(logger, 3, "Functional shape of the resulted (composed) elements:%s"
-                       % (result_element_shape,))
-        log.print_matrix_info(logger, composed_ph_mat, 4,
-                              "Resulted (composed) semantic space:")
+        log.print_info(logger, 3, "Functional shape of the resulted (composed) elements:%s" % (result_element_shape,))
+        log.print_matrix_info(logger, composed_ph_mat, 4, "Resulted (composed) semantic space:")
         log.print_time_info(logger, time.time(), start, 2)
 
-        return Space(composed_ph_mat, phrase_list, self.composed_id2column,
-                     element_shape = result_element_shape)
-
+        return Space(composed_ph_mat, phrase_list, self.composed_id2column, element_shape=result_element_shape)
 
     def _compose(self, function_arg_vec, arg_vec, function_arg_element_shape):
 

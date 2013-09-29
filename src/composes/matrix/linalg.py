@@ -284,11 +284,11 @@ class Linalg(object):
 
         #sub_loop_time = time()
 
-        for iteration in xrange(1, maxiter):
+        for iteration in range(1, maxiter):
             grad = w_t_w * h - w_t_v
 
             # search step size
-            for inner_iter in xrange(1, 20):
+            for inner_iter in range(1, 20):
                 hn = h - alpha * grad
                 hn = hn.get_non_negative()
                 d = hn - h
@@ -356,7 +356,7 @@ class Linalg(object):
         tolH = tolW
 
         #loop_time = init_time
-        for iteration in xrange(1, Linalg._NMF_MAX_ITER):
+        for iteration in range(1, Linalg._NMF_MAX_ITER):
             log.print_info(logger, 5, "Iteration: %d(%d)" % (iteration, Linalg._NMF_MAX_ITER))
 
             if time() - init_time > Linalg._NMF_TIME_LIMIT:
