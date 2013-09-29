@@ -507,7 +507,7 @@ class Space(object):
 
         if "format" in kwargs:
             format_ = kwargs["format"]
-            if not format_ in ["dm","sm"]:
+            if not format_ in ["dm", "sm"]:
                 raise ValueError("Unrecognized format: %s" % format_)
         else:
             raise ValueError("Format of input files needs to be specified")
@@ -527,7 +527,7 @@ class Space(object):
 
         else:
             if id2row is None:
-                [id2row],[row2id] = extract_indexing_structs(data_file, [0])
+                [id2row], [row2id] = extract_indexing_structs(data_file, [0])
             mat = read_dense_space_data(data_file, row2id)
 
         if id2column and len(id2column) != mat.shape[1]:
