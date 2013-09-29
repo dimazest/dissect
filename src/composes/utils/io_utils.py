@@ -8,7 +8,7 @@ from __future__ import print_function
 import numpy as np
 import pickle
 import os
-import gzip as gzip
+import gzip
 from warnings import warn
 import struct
 
@@ -32,7 +32,7 @@ def save(object_, file_name):
 
 
 def load(file_name, data_type=None):
-    with open(file_name) as f:
+    with open(file_name, 'rb') as f:
         result = pickle.load(f)
 
     if not data_type is None:
@@ -56,18 +56,15 @@ def create_parent_directories(file_name):
 
 
 def extract_indexing_structs(filename, field_list):
-    str2id = {}
-    id2str = []
-
-    str2id_list = [str2id.copy() for _ in field_list]
-    id2str_list = [list(id2str) for _ in field_list]
+    str2id_list = [{} for _ in field_list]
+    id2str_list = [[] for _ in field_list]
     index_list = [0] * len(field_list)
     max_field = max(field_list)
 
     if filename.endswith(".gz"):
-        input_stream = gzip.open(filename, "rb")
+        input_stream = gzip.open(filename, "rt")
     else:
-        input_stream = open(filename, "rb")
+        input_stream = open(filename, "rt")
 
     for line in input_stream:
         if line.strip():
@@ -138,9 +135,9 @@ def read_list(file_name, **kwargs):
 def read_sparse_space_data(matrix_file, row2id, column2id, **kwargs):
 
     if matrix_file.endswith(".gz"):
-        f = gzip.open(matrix_file, "rb")
+        f = gzip.open(matrix_file, "rt")
     else:
-        f = open(matrix_file, "rb")
+        f = open(matrix_file, "rt")
 
     no_lines = sum(1 for line in f if line.strip())
     f.close()
@@ -158,9 +155,9 @@ def read_sparse_space_data(matrix_file, row2id, column2id, **kwargs):
     data = np.zeros(no_lines, dtype=element_type)
 
     if matrix_file.endswith(".gz"):
-        f = gzip.open(matrix_file, "rb")
+        f = gzip.open(matrix_file, "rt")
     else:
-        f = open(matrix_file, "rb")
+        f = open(matrix_file, "rt")
 
     i = 0
     for line in f:
@@ -197,11 +194,11 @@ def read_sparse_space_data(matrix_file, row2id, column2id, **kwargs):
 def read_dense_space_data(matrix_file, row2id, **kwargs):
     #get number of rows and columns
     if matrix_file.endswith(".gz"):
-        f = gzip.open(matrix_file, "rb")
+        f = gzip.open(matrix_file, "rt")
     else:
-        f = open(matrix_file, "rb")
+        f = open(matrix_file, "rt")
 
-    first_line = f.next()
+    first_line = next(f)
     no_cols = len(first_line.strip().split()) - 1
     if no_cols <= 0:
         raise ValueError("Invalid row: %s, expected at least %d fields" % (first_line.strip(), 2))
@@ -220,12 +217,12 @@ def read_dense_space_data(matrix_file, row2id, **kwargs):
     m = np.mat(np.zeros(shape=(no_rows, no_cols), dtype=element_type))
 
     if matrix_file.endswith(".gz"):
-        f = gzip.open(matrix_file, "rb")
+        f = gzip.open(matrix_file, "rt")
     else:
-        f = open(matrix_file, "rb")
+        f = open(matrix_file, "rt")
 
     for line in f:
-        if not line.strip() == "":
+        if line.strip():
             elements = line.strip().split()
             if len(elements) != no_cols + 1:
                 raise ValueError("Invalid row: %s, expected %d fields"

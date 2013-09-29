@@ -46,6 +46,7 @@ def usage(errno=0):
     )
     sys.exit(errno)
 
+
 def evaluate_sim(in_file, columns, corr_measures):
 
     if not len(columns) == 2:
@@ -57,7 +58,7 @@ def evaluate_sim(in_file, columns, corr_measures):
     prediction = []
     with open(in_file) as in_stream:
         for line in in_stream:
-            if not line.strip() == "":
+            if line.strip():
                 elems = line.strip().split()
                 gold.append(float(elems[col0]))
                 prediction.append(float(elems[col1]))

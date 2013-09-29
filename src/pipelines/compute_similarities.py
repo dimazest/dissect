@@ -122,7 +122,7 @@ def compute_sim(in_file, columns, out_dir, sim_measures, space_files):
 
         with open(in_file) as in_stream, open(out_file,"w") as out_stream:
             for line in in_stream:
-                if not line.strip() == "":
+                if line.strip():
                     elems = line.strip().split()
                     word1 = elems[col0]
                     word2 = elems[col1]
