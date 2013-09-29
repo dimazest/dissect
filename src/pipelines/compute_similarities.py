@@ -20,10 +20,7 @@ import sys
 import os
 import getopt
 from warnings import warn
-try:
-    from ConfigParser import ConfigParser
-except ImportError:
-    from configparser import ConfigParser
+
 from composes.semantic_space.space import Space
 from composes.similarity.cos import CosSimilarity
 from composes.similarity.lin import LinSimilarity
@@ -32,6 +29,7 @@ from composes.similarity.euclidean import EuclideanSimilarity
 from composes.utils import io_utils
 from composes.utils import log_utils
 import pipelines.pipeline_utils as utils
+from pipelines.configparser import configparser
 
 import logging
 logger = logging.getLogger("test vector space construction pipeline")
@@ -141,7 +139,6 @@ def main(sys_argv):
         usage()
         sys.exit(1)
 
-
     out_dir = None
     in_file = None
     sim_measures = None
@@ -153,21 +150,21 @@ def main(sys_argv):
 
     if (len(argv) == 1):
         config_file = argv[0]
-        config = ConfigParser()
-        config.read(config_file)
-        out_dir = utils.config_get(section, config, "output", None)
-        in_file = utils.config_get(section, config, "input", None)
-        in_dir = utils.config_get(section, config, "in_dir", None)
-        sim_measures = utils.config_get(section, config, "sim_measures", None)
+
+        configparser.read(config_file)
+        out_dir = utils.config_get(section, configparser, "output", None)
+        in_file = utils.config_get(section, configparser, "input", None)
+        in_dir = utils.config_get(section, configparser, "in_dir", None)
+        sim_measures = utils.config_get(section, configparser, "sim_measures", None)
         if not sim_measures is None:
             sim_measures = sim_measures.split(",")
-        spaces = utils.config_get(section, config, "space", None)
+        spaces = utils.config_get(section, configparser, "space", None)
         if not spaces is None:
             spaces = spaces.split(",")
-        columns = utils.config_get(section, config, "columns", None)
+        columns = utils.config_get(section, configparser, "columns", None)
         if not columns is None:
             columns = columns.split(",")
-        log_file = utils.config_get(section, config, "log", None)
+        log_file = utils.config_get(section, configparser, "log", None)
 
     for opt, val in opts:
         if opt in ("-i", "--input"):
