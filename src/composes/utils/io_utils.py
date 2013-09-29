@@ -23,11 +23,11 @@ from composes.utils.gen_utils import assert_valid_kwargs
 def save(object_, file_name):
     create_parent_directories(file_name)
     try:
-        with open(file_name, 'w') as f:
+        with open(file_name, 'wb') as f:
             pickle.dump(object_, f, 2)
     except struct.error:
         warn("object is too big, using pickle with protocol 0")
-        with open(file_name, 'w') as f:
+        with open(file_name, 'wb') as f:
             pickle.dump(object_, f, 0)
 
 
@@ -58,11 +58,10 @@ def create_parent_directories(file_name):
 def extract_indexing_structs(filename, field_list):
     str2id = {}
     id2str = []
-    no_fields = len(field_list)
 
-    str2id_list = [str2id.copy() for i in xrange(no_fields)]
-    id2str_list = [list(id2str) for i in xrange(no_fields)]
-    index_list = [0 for i in xrange(no_fields)]
+    str2id_list = [str2id.copy() for _ in field_list]
+    id2str_list = [list(id2str) for _ in field_list]
+    index_list = [0] * len(field_list)
     max_field = max(field_list)
 
     if filename.endswith(".gz"):
@@ -205,8 +204,7 @@ def read_dense_space_data(matrix_file, row2id, **kwargs):
     first_line = f.next()
     no_cols = len(first_line.strip().split()) - 1
     if no_cols <= 0:
-        raise ValueError("Invalid row: %s, expected at least %d fields"
-                                 % (first_line.strip(), 2))
+        raise ValueError("Invalid row: %s, expected at least %d fields" % (first_line.strip(), 2))
     f.close()
 
     no_rows = len(row2id)
@@ -268,13 +266,13 @@ def print_cooc_mat_sparse_format(matrix_, id2row, id2column, file_prefix):
             row_index = 0
             next_row = row_indices[1]
             row = id2row[0]
-            for i in xrange(len(data)):
+            for i, datum in enumerate(data):
                 while i == next_row:
                     row_index += 1
                     next_row = row_indices[row_index + 1]
                     row = id2row[row_index]
                 col = id2column[col_indices[i]]
-                f.write("%s\t%s\t%f\n" % (row, col, data[i]))
+                f.write("%s\t%s\t%f\n" % (row, col, datum))
         else:
             for i in range(mat.shape[0]):
                 for j in range(mat.shape[1]):
