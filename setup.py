@@ -5,6 +5,14 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
 
+if sys.version_info > (3, ):
+    dependency_links = [
+        'https://github.com/dimazest/sparsesvd/archive/61b55a6.zip#egg=sparsesvd',
+    ]
+else:
+    dependency_links = []
+
+
 class PyTest(TestCommand):
     def finalize_options(self):
         TestCommand.finalize_options(self)
@@ -26,6 +34,7 @@ setup(
     author_email='georgiana.dinu@unitn.it,thenghia.pham@unitn.it',
     url='http://http://clic.cimec.unitn.it/composes/toolkit/',
     install_requires=['numpy', 'scipy', 'sparsesvd'],
+    dependency_links=dependency_links,
     tests_require=['pytest'],
     cmdclass={'test': PyTest},
     package_dir={'': 'src'},
