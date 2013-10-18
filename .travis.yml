@@ -20,6 +20,7 @@ before_install:
   - pip install pip --upgrade
   - pip install wheel
   - $WHEEL numpy==1.7.1
+  - pip install https://github.com/dimazest/sparsesvd/archive/72adffd01820aff446a826.zip#egg=sparsesvd-cffi-0.2.2-dev
 
 install:
   - pip install . --use-mirrors
