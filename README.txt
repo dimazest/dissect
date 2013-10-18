@@ -15,6 +15,10 @@ To run the tests execute::
 
     python setup.py test
 
+To run the tests on all supperoted Python versions and implementations run::
+
+   tox
+
 To install the package in an isolated environment for development run::
 
     virtualenv .
