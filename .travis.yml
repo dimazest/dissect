@@ -3,7 +3,7 @@ python:
   - "2.7"
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
+  - sudo apt-get install -qq python-numpy python-scipy matplotlib
   - rm /home/travis/virtualenv/python2.7/lib/python2.7/no-global-site-packages.txt
 # command to install dependencies
 install:
