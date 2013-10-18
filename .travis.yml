@@ -16,13 +16,13 @@ before_install:
   - rm /home/travis/virtualenv/python3.2/lib/python3.2/no-global-site-packages.txt
   - rm /home/travis/virtualenv/python3.3/lib/python3.3/no-global-site-packages.txt
 
-  - pip install setuptools --upgrade
-  - pip install pip --upgrade
-  - pip install wheel
-  - $WHEEL numpy==1.7.1
+  - pip install setuptools --upgrade --use-mirrors
+  - pip install pip --upgrade --use-mirrors
+  - pip install wheel --use-mirrors
+  - $WHEEL numpy==1.7.1 scipy==0.12.1
   - pip install https://github.com/dimazest/sparsesvd/archive/72adffd01820aff446a826.zip#egg=sparsesvd-cffi-0.2.2-dev
 
 install:
-  - pip install . --use-mirrors
+  - $WHEEL .
 # command to run tests
 script: python setup.py test
