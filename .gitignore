@@ -1,14 +1,6 @@
 *.pyc
-*.pyo
-*/__pycache__/
-*.egg-info/
+
+resource/unittest/pipelines_test_resources/
 
 .Python
-
-bin/
-include/
-lib/
-man/
-
-resource/unittest/output/
-resource/unittest/pipelines_test_resources/
+.coverage
