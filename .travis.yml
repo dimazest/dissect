@@ -9,13 +9,11 @@ env:
         - WHEEL="pip install --find-links http://wheels.astropy.org/ --find-links http://wheels2.astropy.org/ --use-wheel --use-mirrors"
 
 before_install:
-    - pip install setuptools --upgrade
-    - pip install pip --upgrade
-    - pip install wheel
-
+  - pip install setuptools --upgrade
+  - pip install pip --upgrade
+  - pip install wheel
   - $WHEEL numpy==1.7.1 scipy==0.12.1
 
-# command to install dependencies
 install:
   - pip install . --use-mirrors
 # command to run tests
