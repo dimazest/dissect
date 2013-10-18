@@ -9,6 +9,8 @@ from unitest import toolkit_dir
 import pipelines.compute_neighbours as find_neighbours
 from pipelines import build_core_space as bcs
 
+import pytest
+
 
 def read_neighbours_list(file_name):
     result = []
@@ -32,7 +34,9 @@ def read_neighbours_list(file_name):
     return result
 
 
+@pytest.mark.xfail(run=False)
 class NeighboursPipelineTest(unittest.TestCase):
+
 
     def setUp(self):
         self.dir_ = data_dir
@@ -91,10 +95,10 @@ class NeighboursPipelineTest(unittest.TestCase):
                        "-i", self.dir_ + "pipelines_test_resources/neighbours_input.txt",
                        "-n", "2",
                        "--space", "%spipelines_test_resources/CORE_SS.mat3.raw.top_sum_3.svd_2.pkl,%spipelines_test_resources/CORE_SS.mat3.raw.top_sum_3.svd_2.pkl" %(self.dir_,self.dir_),
-                       "-o" "/tmp/FAKE_PATH"
+                       "-o" "/home/georgianadinu/work/FAKE_PATH"
                       ])
         #neighbours_list = read_neighbours_list(self.dir_ + "NEIGHBOURS.neighbours_input.txt.euclidean")
-        #print(len(neighbours_list))
+        #print len(neighbours_list)
 
 
     def tearDown(self):
