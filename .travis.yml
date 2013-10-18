@@ -6,18 +6,17 @@ python:
 
 env:
     global:
-        - PIP="pip install --find-links http://wheels.astropy.org/ --find-links http://wheels2.astropy.org/ --use-wheel --use-mirrors"
+        - WHEEL="pip install --find-links http://wheels.astropy.org/ --find-links http://wheels2.astropy.org/ --use-wheel --use-mirrors"
 
 before_install:
-    # Install the pip that supports wheel
     - pip install setuptools --upgrade
     - pip install pip --upgrade
     - pip install wheel
 
+  - $WHEEL numpy==1.7.1 scipy==0.12.1
 
 # command to install dependencies
 install:
-  - $PIP install numpy==1.7.1 scipy==0.12.1
   - pip install . --use-mirrors
 # command to run tests
 script: python setup.py test
