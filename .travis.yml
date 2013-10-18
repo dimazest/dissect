@@ -5,6 +5,9 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get build-dep python-scipy python-matplotlib
   - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
+  - pwd
+  - ls
+  - python -c'import scipy; print scipy.__file__'
 # command to install dependencies
 install: "pip install ."
 # command to run tests
