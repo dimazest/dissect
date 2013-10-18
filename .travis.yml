@@ -13,7 +13,7 @@ before_install:
   - pip install pip --upgrade --use-mirrors
   - pip install wheel --use-mirrors
   - $WHEEL numpy==1.7.1 scipy==0.12.1
-  - '$WHEEL https://github.com/dimazest/sparsesvd/archive/72adffd01820aff446a826.zip#egg=sparsesvd-cffi-0.2.2-dev'
+  - pip install https://dl.dropboxusercontent.com/u/50040986/index/sparsesvd-cffi-0.2.2-dev.tar.gz
 install:
   - $WHEEL .
 # command to run tests
