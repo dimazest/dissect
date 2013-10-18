@@ -3,10 +3,8 @@ python:
   - "2.7"
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
-  - ls /home/travis/virtualenv/python2.7/lib/python2.7/
+  - sudo apt-get install -qq python-numpy python-scipy python-matplotlib cython
   - rm /home/travis/virtualenv/python2.7/lib/python2.7/no-global-site-packages.txt
-  - python -c'import scipy; print scipy.__file__'
 # command to install dependencies
 install: pip install . --use-mirrors
 # command to run tests
