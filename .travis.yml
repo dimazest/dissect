@@ -12,6 +12,6 @@ install:
 # command to run tests
 script: python setup.py test
 after_success:
-  - pip install python-coveralls . --use-mirrors
+  - pip install python-coveralls pytest-cov . --use-mirrors
   - py.test --cov=composes --cov=pipelines --cov-report=term-missing src/unitest
   - coveralls
