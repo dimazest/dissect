@@ -6,7 +6,7 @@ python:
 
 env:
     global:
-        - WHEEL="pip install --find-links http://wheels.astropy.org/ --find-links http://wheels2.astropy.org/ --use-wheel --use-mirrors"
+        - WHEEL="pip install --find-links https://dl.dropboxusercontent.com/u/50040986/index/index.html --use-wheel --use-mirrors"
 
 before_install:
   - sudo apt-get update -qq
@@ -15,7 +15,7 @@ before_install:
   - pip install pip --upgrade --use-mirrors
   - pip install wheel --use-mirrors
   - $WHEEL numpy==1.7.1 scipy==0.12.1
-  - easy_install https://dl.dropboxusercontent.com/u/50040986/index/sparsesvd-cffi-0.2.2-dev.tar.gz
+  - easy_install https://dl.dropboxusercontent.com/u/50040986/index/sparsesvd-cffi-0.2.3-dev.tar.gz
 install:
   - $WHEEL .
 # command to run tests

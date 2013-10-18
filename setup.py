@@ -26,7 +26,7 @@ setup(
     author_email='georgiana.dinu@unitn.it,thenghia.pham@unitn.it',
     url='http://http://clic.cimec.unitn.it/composes/toolkit/',
     install_requires=['numpy', 'scipy', 'sparsesvd-cffi'],
-    dependency_links=['https://github.com/dimazest/sparsesvd/archive/72adffd01820aff446a826.zip#egg=sparsesvd-cffi-0.2.2-dev'],
+    dependency_links=['https://dl.dropboxusercontent.com/u/50040986/index/sparsesvd-cffi-0.2.3-dev.tar.gz#egg=sparsesvd-cffi-0.2.3-dev'],
     tests_require=['pytest'],
     cmdclass={'test': PyTest},
     package_dir={'': 'src'},
