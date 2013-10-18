@@ -16,7 +16,7 @@ before_install:
   - pip install wheel --use-mirrors
   - $WHEEL numpy==1.7.1 scipy==0.12.1
   - easy_install https://dl.dropboxusercontent.com/u/50040986/index/sparsesvd-cffi-0.2.3-dev.tar.gz
-  - python -c 'import sysconfig; print(sysconfig.get_config_var("SO"))'
+  - python -c 'import sysconfig; print(sysconfig.get_config_var("EXT_SUFFIX"))'
   - 'ls /home/travis/virtualenv/python3.3/lib/python3.3/site-packages/sparsesvd_cffi-0.2.3_dev-py3.3-linux-x86_64.egg/ && true '
 install:
   - $WHEEL .
