@@ -9,6 +9,8 @@ env:
         - WHEEL="pip install --find-links http://wheels.astropy.org/ --find-links http://wheels2.astropy.org/ --use-wheel --use-mirrors"
 
 before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq python-numpy python-scipy
   - pip install setuptools --upgrade --use-mirrors
   - pip install pip --upgrade --use-mirrors
   - pip install wheel --use-mirrors
