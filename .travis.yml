@@ -10,8 +10,8 @@ before_install:
   - rm /home/travis/virtualenv/python2.7/lib/python2.7/no-global-site-packages.txt
   - rm /home/travis/virtualenv/python3.2/lib/python3.2/no-global-site-packages.txt
   - rm /home/travis/virtualenv/python3.3/lib/python3.3/no-global-site-packages.txt
-  - /usr/bin/python3.2 -c'import numpy; numpy.__file__'
-  - python -c'import numpy; numpy.__file__'
+  - /usr/bin/python3.2 -c'import numpy; print(numpy.__file__)'
+  - python -c'import numpy; print(numpy.__file__)'
 # command to install dependencies
 install:
   - pip install . --use-mirrors
