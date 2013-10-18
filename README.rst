@@ -1,6 +1,10 @@
 DIStributional SEmantics Composition Toolkit
 ============================================
 
+.. image:: https://coveralls.io/repos/dimazest/dissect/badge.png?branch=master
+    :target: https://coveralls.io/r/dimazest/dissect?branch=master
+
+
 Installation
 ------------
 
