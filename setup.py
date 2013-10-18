@@ -26,7 +26,6 @@ setup(
     author_email='georgiana.dinu@unitn.it,thenghia.pham@unitn.it',
     url='http://http://clic.cimec.unitn.it/composes/toolkit/',
     install_requires=['numpy', 'scipy', 'sparsesvd'],
-    dependency_links=['https://github.com/dimazest/sparsesvd/archive/61b55a6.zip#egg=sparsesvd'],
     tests_require=['pytest'],
     cmdclass={'test': PyTest},
     package_dir={'': 'src'},

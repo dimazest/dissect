@@ -12,6 +12,7 @@ before_install:
   - rm /home/travis/virtualenv/python3.3/lib/python3.3/no-global-site-packages.txt
 # command to install dependencies
 install:
+  - 'pip install https://github.com/dimazest/sparsesvd/archive/61b55a6.zip#egg=sparsesvd'
   - pip install . --use-mirrors
 # command to run tests
 script: python setup.py test
