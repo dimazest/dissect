@@ -16,6 +16,7 @@ before_install:
   - pip install pip --upgrade --use-mirrors
   - pip install wheel --use-mirrors
   - $WHEEL numpy==1.7.1 scipy==0.12.1
+  - $WHEEL https://dl.dropboxusercontent.com/u/50040986/index/sparsesvd-cffi-0.2.3-dev.tar.gz
 
 install:
   - $WHEEL .
