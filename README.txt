@@ -1,6 +1,9 @@
 DIStributional SEmantics Composition Toolkit
 ============================================
 
+.. image:: https://travis-ci.org/dimazest/dissect.png?branch=master
+    :target: https://travis-ci.org/dimazest/dissect
+
 Installation
 ------------
 
