@@ -7,6 +7,6 @@ before_install:
   - echo $PATH
   - /usr/bin/python -c'import scipy; print scipy.__file__'
 # command to install dependencies
-install: "pip install ."
+install: pip install . --use-mirrors
 # command to run tests
 script: python setup.py test
