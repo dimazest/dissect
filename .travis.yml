@@ -6,6 +6,7 @@ before_install:
   - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
   - echo $PATH
   - /usr/bin/python -c'import scipy; print scipy.__file__'
+  - ln -s /usr/lib/python2.7/dist-packages/scipy/ /home/travis/virtualenv/python2.7/lib/python2.7/site-packages/
 # command to install dependencies
 install: pip install . --use-mirrors
 # command to run tests
