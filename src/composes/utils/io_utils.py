@@ -3,7 +3,6 @@ Created on Oct 16, 2012
 
 @author: nghia
 '''
-from __future__ import print_function
 
 import numpy as np
 import pickle
@@ -47,12 +46,10 @@ def create_directories(directory):
 
 
 def create_parent_directories(file_name):
-    parts = file_name.split("/")
-    if (len(parts) > 1):
-        parent_dir = "/".join(parts[0:-1])
-        if (not os.path.exists(parent_dir)):
-            print("Creating %s" % parent_dir)
-            os.makedirs(parent_dir)
+    parent_dir = os.path.dirname(file_name)
+
+    if not os.path.exists(parent_dir):
+        os.makedirs(parent_dir)
 
 
 def extract_indexing_structs(filename, field_list):

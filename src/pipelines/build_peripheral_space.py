@@ -138,7 +138,7 @@ def main(sys_argv):
     out_dir = None
     in_file_prefix = None
     core_space_file = None
-    log_file = None
+    log_file = './build_core_space.log'
     in_format = None
     out_format = None
     core_in_dir = None
@@ -147,7 +147,7 @@ def main(sys_argv):
 
     section = "build_peripheral_space"
 
-    if (len(argv) == 1):
+    if len(argv) == 1:
         config_file = argv[0]
         config = ConfigParser()
         config.read(config_file)
@@ -156,7 +156,7 @@ def main(sys_argv):
         core_space_file = utils.config_get(section, config, "core", None)
         core_in_dir = utils.config_get(section, config, "core_in_dir", None)
         core_filter = utils.config_get(section, config, "core_filter", "")
-        log_file = utils.config_get(section, config, "log", None)
+        log_file = utils.config_get(section, config, "log", './build_core_space.log')
         in_format = utils.config_get(section, config, "input_format", None)
         out_format = utils.config_get(section, config, "output_format", None)
         gz = utils.config_get(section, config, "gz", gz)
