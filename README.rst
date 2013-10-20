@@ -1,6 +1,10 @@
 DIStributional SEmantics Composition Toolkit
 ============================================
 
+.. image:: https://coveralls.io/repos/dimazest/dissect/badge.png?branch=master
+    :target: https://coveralls.io/r/dimazest/dissect?branch=master
+
+
 Installation
 ------------
 
@@ -14,6 +18,10 @@ Development
 To run the tests execute::
 
     python setup.py test
+
+To run the tests on all supperoted Python versions and implementations run::
+
+   tox
 
 To install the package in an isolated environment for development run::
 

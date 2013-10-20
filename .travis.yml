@@ -11,3 +11,8 @@ install:
   - pip install . --use-mirrors
 # command to run tests
 script: python setup.py test
+after_success:
+  - sudo apt-get install python-yaml
+  - pip install coveralls pytest-cov . --use-mirrors
+  - py.test --cov=composes --cov=pipelines --cov-report=term-missing src/unitest
+  - coveralls
