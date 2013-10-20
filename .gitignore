@@ -1,11 +1,20 @@
 *.pyc
+*.orig
 
 resource/unittest/pipelines_test_resources/
+resource/unittest/output/
 
 .Python
 .coverage
 
 .tox/
+bin/
+lib/
+include/
+man/
+dist/
 
-*.egg/
+htmlcov/
+
+*.egg
 src/dissect.egg-info/
