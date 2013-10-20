@@ -1,11 +1,12 @@
-'''
+"""
 Created on Oct 2, 2012
 
 @author: Georgiana Dinu, Pham The Nghia
-'''
-
+"""
 import numpy as np
-from similarity import Similarity
+
+from composes.similarity.similarity import Similarity
+
 
 class LinSimilarity(Similarity):
     """
@@ -18,13 +19,6 @@ class LinSimilarity(Similarity):
 
     """
 
-    _name = "lin"
-
-    def __init__(self):
-        '''
-        Constructor
-        '''
-
     def _sim(self, v1, v2):
 
         common = v1.multiply(v2)
@@ -35,4 +29,5 @@ class LinSimilarity(Similarity):
             return 0
         else:
             return common.multiply(v1 + v2).sum() / np.double(denom)
+
 
