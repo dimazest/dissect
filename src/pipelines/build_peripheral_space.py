@@ -106,6 +106,7 @@ def transform_raw_per_space(raw_per_space, in_file_prefix, out_dir, out_format, 
     if not out_format is None:
         space.export(out_file_prefix, format=out_format)
 
+
 def build_space_batch(in_file_prefix, in_format, out_dir, out_format,
                       core_in_dir, core_filter, is_gz):
 
