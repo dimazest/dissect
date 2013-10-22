@@ -157,7 +157,7 @@ def main(sys_argv):
         log_file = utils.config_get(section, config, "log", None)
         out_format = utils.config_get(section, config, "output_format", None)
 
-    print(opts            )
+    print(opts)
     for opt, val in opts:
         if opt in ("-i", "--input"):
             in_file = val

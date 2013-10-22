@@ -60,4 +60,3 @@ class TopFeatureSelection(FeatureSelection):
         return matrix_, sorted_perm
 
 
-

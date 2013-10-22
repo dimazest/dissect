@@ -138,4 +138,3 @@ class WeightedAdditive(CompositionModel):
     """
     Beta parameter, default 0.5.
     """
-

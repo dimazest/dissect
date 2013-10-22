@@ -32,4 +32,3 @@ class Svd(DimensionalityReduction):
         u, s, v = Linalg.svd(matrix_, self._reduced_dimension)
         return u.scale_columns(s), v
 
-

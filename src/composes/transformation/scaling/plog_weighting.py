@@ -28,4 +28,3 @@ class PlogWeighting(Scaling):
         return matrix_
 
 
-

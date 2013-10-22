@@ -411,4 +411,3 @@ class Linalg(object):
     def _sparse_pinv(matrix_):
         # TODO: implement pinv
         return SparseMatrix(np.linalg.pinv(matrix_.mat.todense()))
-

@@ -64,7 +64,7 @@ def evaluate_sim(in_file, columns, corr_measures):
                 prediction.append(float(elems[col1]))
 
     for corr_measure in corr_measures:
-        print("CORRELATION:%s" % corr_measure                    )
+        print("CORRELATION:%s" % corr_measure)
         corr = scoring_utils.score(gold, prediction, corr_measure)
         print("\t%f" % corr  )
 
@@ -153,4 +153,3 @@ def main(sys_argv):
 
 if __name__ == '__main__':
     main(sys.argv)
-

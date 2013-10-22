@@ -53,6 +53,10 @@ def create_parent_directories(file_name):
 
 
 def extract_indexing_structs(filename, field_list):
+    str2id = {}
+    id2str = []
+    no_fields = len(field_list)
+
     str2id_list = [{} for _ in field_list]
     id2str_list = [[] for _ in field_list]
     index_list = [0] * len(field_list)

@@ -13,5 +13,5 @@ print(my_per_space.id2row)
 print(my_per_space.cooccurrence_matrix)
 
 #get the top two neighbours of "car" in a peripheral space
-print(my_space.get_neighbours("car", 2, CosSimilarity(), ) space2=my_per_space)
+print(my_space.get_neighbours("car", 2, CosSimilarity(), space2=my_per_space))
 

@@ -105,4 +105,3 @@ def matrix_type_conflict(matrix_list):
 
 
 
-

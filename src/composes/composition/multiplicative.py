@@ -41,4 +41,3 @@ class Multiplicative(CompositionModel):
         Current multiplicative model cannot be exported, it has no parameters.
         """
         raise IllegalOperationError("cannot export a Multiplicative model.")
-

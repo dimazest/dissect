@@ -39,6 +39,7 @@ class Normalization(Scaling):
             else:
                 raise ValueError("Unrecognized parameter: %s" % kwargs.keys())
 
+
     def apply(self, matrix_, total=None):
 
         if total is None:
@@ -60,4 +61,3 @@ class Normalization(Scaling):
             return matrix_.norm()
         else:
             return matrix_.sum()
-

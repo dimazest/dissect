@@ -50,4 +50,3 @@ class EpmiWeighting(Scaling):
     def get_column_stats(self, matrix_):
         return matrix_.sum(0)
 
-
